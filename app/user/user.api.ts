@@ -3,27 +3,19 @@ import { AxiosPromise } from 'axios';
 
 import { mockResponse } from '../mocks/api';
 import { Dave, Users } from '../mocks/user';
-
-export interface UserDTO {
-    id: number;
-    login: string;
-    role: string;
-}
-
-export type EditableUserDTO = Pick<UserDTO, Exclude<keyof UserDTO, 'id'>>;
-export type EditUserDTO = Partial<EditableUserDTO>;
-
-export type DeleteUserDTO = Pick<UserDTO, 'id'>;
+import { User } from './models';
 
 export interface IUserApi {
-    getAll(): AxiosPromise<UserDTO[]>;
-    edit(data: EditUserDTO): AxiosPromise<UserDTO>;
+    getAll(): AxiosPromise<User[]>;
+    edit(data: User): AxiosPromise<User>;
     delete(data: DeleteUserDTO): AxiosPromise<void>;
 }
 
+export type DeleteUserDTO = User['id'];
+
 @injectable()
 export class UserApi implements IUserApi {
-    getAll(): AxiosPromise<UserDTO[]> {
+    getAll(): AxiosPromise<User[]> {
         return mockResponse({
             log: 'UserApi.getAll',
             data: void 0,
@@ -31,7 +23,7 @@ export class UserApi implements IUserApi {
         });
     }
 
-    edit(data: EditUserDTO) {
+    edit(data: User) {
         return mockResponse({
             log: 'UserApi.edit',
             data,
@@ -39,10 +31,10 @@ export class UserApi implements IUserApi {
         });
     }
 
-    delete(data: DeleteUserDTO) {
+    delete(id: DeleteUserDTO) {
         return mockResponse({
             log: 'UserApi.delete',
-            data,
+            data: id,
             response: void 0,
         });
     }

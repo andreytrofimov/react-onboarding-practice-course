@@ -3,21 +3,16 @@ import { AxiosPromise } from 'axios';
 
 import { mockResponse } from '../mocks/api';
 import { Dave } from '../mocks/user';
-import { UserDTO } from './user.api';
-
-export interface LoginDTO {
-    login: UserDTO['login'];
-    password: string;
-}
+import { User } from './models';
 
 export interface IAuthApi {
-    register(data: LoginDTO): AxiosPromise<void>;
-    login(data: LoginDTO): AxiosPromise<UserDTO>;
+    register(data: User): AxiosPromise<void>;
+    login(data: User): AxiosPromise<User>;
 }
 
 @injectable()
 export class AuthApi implements IAuthApi {
-    register(data: LoginDTO) {
+    register(data: User) {
         return mockResponse({
             log: 'AuthApi.register',
             data,
@@ -25,7 +20,7 @@ export class AuthApi implements IAuthApi {
         });
     }
 
-    login(data: LoginDTO) {
+    login(data: User) {
         return mockResponse({
             log: 'AuthApi.login',
             data,
