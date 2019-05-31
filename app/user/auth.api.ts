@@ -7,8 +7,10 @@ import { User } from './models';
 
 export interface IAuthApi {
     register(data: User): AxiosPromise<void>;
-    login(data: User): AxiosPromise<User>;
+    login(data: LoginDTO): AxiosPromise<User>;
 }
+
+export type LoginDTO = Required<Pick<User, 'login' | 'password'>>;
 
 @injectable()
 export class AuthApi implements IAuthApi {
@@ -20,7 +22,7 @@ export class AuthApi implements IAuthApi {
         });
     }
 
-    login(data: User) {
+    login(data: LoginDTO) {
         return mockResponse({
             log: 'AuthApi.login',
             data,
