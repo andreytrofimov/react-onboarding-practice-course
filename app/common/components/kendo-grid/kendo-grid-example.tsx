@@ -5,7 +5,7 @@ import { observable, action } from 'mobx';
 
 import { Stack, Button } from '@servicetitan/design-system';
 import { GridColumn } from '@progress/kendo-react-grid';
-import { getPasswordCell } from './editable-cell/get-password-cell';
+import { PasswordCell } from './editable-cell/password-cell';
 
 import { KendoGridState, InMemoryDataSource } from './kendo-grid-state';
 
@@ -207,7 +207,7 @@ export class GridExample extends React.Component {
                     <GridColumn field="UnitsOnOrder" title="First Ordered On" filter="date" editor="date" format="{0:d}" columnMenu={DateRangeColumnMenuFilter} />
                     <GridColumn field="UnitPrice" title="Unit Price" filter="numeric" editor="numeric" format="{0:c}" columnMenu={CurrencyRangeColumnMenuFilter} />
                     <GridColumn field="AvailableFor" title="Available For" cell={getSelectCell(getEnumValues(UserRole))} />
-                    <GridColumn field="Password" title="Password" cell={getPasswordCell()} />
+                    <GridColumn field="Password" title="Password" cell={PasswordCell} />
                 </KendoGrid>
             </React.Fragment>
         );
