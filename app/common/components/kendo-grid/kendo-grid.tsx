@@ -1,8 +1,8 @@
-import { GridCell } from '@progress/kendo-react-grid/dist/es/cells/GridCell';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {
     Grid,
+    GridCell,
     GridProps,
     GridRowProps,
     GridColumn,
@@ -43,8 +43,8 @@ export class KendoGrid extends React.Component<KendoGridProps<any>> {
 
         return (
             <SelectColumnCell
-                { ...props }
-                isRowUnselectable={ this.gridState.isRowUnselectable }
+                {...props}
+                isRowUnselectable={this.gridState.isRowUnselectable}
             />
         );
     }
