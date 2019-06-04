@@ -27,7 +27,7 @@ export function getEditableCell<T>({ viewer, editor }: GetEditableCellParams<T>)
 
         render() {
             if (this.props.rowType !== "data") {
-                return null;
+                return <GridCell {...this.props} />;
             }
             
             if (!this.props.field || !this.props.dataItem.inEdit) {

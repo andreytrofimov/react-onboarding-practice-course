@@ -226,6 +226,7 @@ export class GridExample extends React.Component {
                     gridState={this.gridState}
                     selectable
                     sortable
+                    groupable={{ footer: 'visible' }}
                 >
                     <GridColumn field="ProductID" title="ID" filterable={false} editable={false} width="100px" />
                     <GridColumn field="ProductName" title="Product Name" width="240px" columnMenu={StandardColumnMenuFilter} />
