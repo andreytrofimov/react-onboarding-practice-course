@@ -6,7 +6,7 @@ import { observable, action } from 'mobx';
 import { Stack, Button } from '@servicetitan/design-system';
 import { GridColumn } from '@progress/kendo-react-grid';
 
-import { ActionsComponent, getActionCell } from './editable-cell/get-action-cell';
+import { getEditAndDeleteActionCell } from './editable-cell/get-edit-and-delete-action-cell';
 import { PasswordCell } from './editable-cell/password-cell';
 
 import { KendoGridState, InMemoryDataSource } from './kendo-grid-state';
@@ -177,56 +177,30 @@ export class GridExample extends React.Component {
         this.inEdit = false;
     }
 
-    @action
     handleEditOneClick = (dataItem: Product) => {
         this.gridState.edit(dataItem);
     }
 
-    @action
     handleSaveOneClick = (dataItem: Product) => {
         this.gridState.saveEdit(dataItem);
     }
 
-    @action
     handleCancelOneClick = (dataItem: Product) => {
         this.gridState.cancelEdit(dataItem);
     }
 
-    @action
     handleDeleteOneClick = (dataItem: Product) => {
         this.gridState.removeFromDataSource(i => i.ProductID === dataItem.ProductID);
     }
 
+    ActionCell = getEditAndDeleteActionCell({
+        onEdit: this.handleEditOneClick,
+        onSave: this.handleSaveOneClick,
+        onCancel: this.handleCancelOneClick,
+        onDelete: this.handleDeleteOneClick,
+    });
+
     render() {
-        const rowActions: ActionsComponent = ({ dataItem }) => {
-            const { inEdit } = dataItem;
-
-            if (inEdit) {
-                return (
-                    <React.Fragment>
-                        <Button small text onClick={this.handleCancelOneClick.bind(this, dataItem)}>
-                            Cancel
-                        </Button>
-                        <Button small text primary onClick={this.handleSaveOneClick.bind(this, dataItem)}>
-                            Save
-                        </Button>
-                    </React.Fragment>
-                )
-            }
-
-            return (
-                <React.Fragment>
-                    <Button small text primary onClick={this.handleEditOneClick.bind(this, dataItem)}>
-                        Edit
-                    </Button>
-                    <Button small text negative onClick={this.handleDeleteOneClick.bind(this, dataItem)}>
-                        Delete
-                    </Button>
-
-                </React.Fragment>
-            );
-        };
-
         return (
             <React.Fragment>
                 <Stack justifyContent="flex-end" className="m-b-2">
@@ -259,7 +233,7 @@ export class GridExample extends React.Component {
                     <GridColumn field="UnitPrice" title="Unit Price" filter="numeric" editor="numeric" format="{0:c}" columnMenu={CurrencyRangeColumnMenuFilter} />
                     <GridColumn field="AvailableFor" title="Available For" cell={getSelectCell(getEnumValues(UserRole))} />
                     <GridColumn field="Password" title="Password" cell={PasswordCell} />
-                    <GridColumn title="Actions" cell={getActionCell({ actions: rowActions })} />
+                    <GridColumn title="Actions" cell={this.ActionCell} />
                 </KendoGrid>
             </React.Fragment>
         );
