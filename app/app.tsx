@@ -5,19 +5,16 @@ import { Stack, Text } from '@servicetitan/design-system';
 
 import { getUserConfirmation } from './common/components/confirm-navigation/confirm-navigation';
 import { SideNavigation } from './common/components/side-navigation';
-import * as Styles from './app.less';
 
 export const App: React.FC = () => (
     <HashRouter getUserConfirmation={getUserConfirmation}>
-        <div className={Styles.container}>
-            <div className={Styles.sideNav}>
+        <Stack alignItems="center" justifyContent="center" className="flex-auto">
+            <Stack.Item alignSelf='flex-start'>
                 <SideNavigation/>
-            </div>
-            <div className={Styles.content}>
-                <Stack alignItems="center" justifyContent="center" className={Styles.content}>
-                    <Text size={5}>React Onboarding Practice Course Template</Text>
-                </Stack>
-            </div>
-        </div>
+            </Stack.Item>
+            <Stack.Item fill>
+                <Text size={5}>React Onboarding Practice Course Template</Text>
+            </Stack.Item>
+        </Stack>
     </HashRouter>
 );
