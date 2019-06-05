@@ -15,7 +15,7 @@ export const LoginPage = () => {
 
                 <ButtonGroup fullWidth>
                     <Link href="/#/register" color="primary">Sign Up</Link>
-                    <Button className="w-50" primary type="submit">Login</Button>
+                    <Button full primary type="submit">Login</Button>
                 </ButtonGroup>
             </Form>
         </AuthLayout>

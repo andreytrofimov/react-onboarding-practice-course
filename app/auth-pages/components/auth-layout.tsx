@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Stack, Text } from '@servicetitan/design-system';
 
-import * as Styles from './auth-pages.less'
+import * as Styles from './auth-layout.less'
 
 interface AuthLayoutProps {
     title: string;

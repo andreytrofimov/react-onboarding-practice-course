@@ -6,6 +6,8 @@ import { Role } from '../../user/models';
 
 import { AuthLayout } from './auth-layout';
 
+const roleOptions = enumToOptions(Role);
+
 export const RegisterPage = () => {
     const register = console.log; // @todo
 
@@ -15,15 +17,11 @@ export const RegisterPage = () => {
                 <Form.Input label="Login" />
                 <Form.Input label="Password" type="password" />
                 <Form.Input label="Password Confirmation" type="password" />
-                <Form.Select
-                    label="Role"
-                    options={enumToOptions(Role)}
-                    defaultValue={Role.Public}
-                />
+                <Form.Select label="Role" options={roleOptions} defaultValue={Role.Public}/>
 
                 <ButtonGroup fullWidth>
                     <Link href="/#/login" color="primary">Sign In</Link>
-                    <Button className="w-50" primary type="submit">Create</Button>
+                    <Button full primary type="submit">Create</Button>
                 </ButtonGroup>
             </Form>
         </AuthLayout>
