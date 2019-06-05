@@ -5,13 +5,14 @@ import { Stack, Text } from '@servicetitan/design-system';
 
 import { getUserConfirmation } from './common/components/confirm-navigation/confirm-navigation';
 import { SideNavigation } from './common/components/side-navigation';
-import { LoginPage } from './login-page';
+import { LoginPage, RegisterPage } from './auth-pages';
 
 export const App: React.FC = () =>
     (
         <HashRouter getUserConfirmation={ getUserConfirmation }>
             <Switch>
                 <Route path="/login" component={LoginPage}/>
+                <Route path="/register" component={RegisterPage}/>
 
                 <Route path="*" component={LoggedIn}/>
             </Switch>
