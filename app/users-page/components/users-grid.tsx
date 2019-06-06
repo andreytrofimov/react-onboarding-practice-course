@@ -7,6 +7,7 @@ import { useEffect, useMemo } from 'react';
 import { getEditAndDeleteActionCell } from '../../common/components/kendo-grid/editable-cell/get-edit-and-delete-action-cell';
 import { getSelectCell } from '../../common/components/kendo-grid/editable-cell/get-select-cell';
 import { PasswordCell } from '../../common/components/kendo-grid/editable-cell/password-cell';
+import { StandardColumnMenuFilter } from '../../common/components/kendo-grid/filters/column-menu-filters';
 import { KendoGrid } from '../../common/components/kendo-grid/kendo-grid';
 import { InMemoryDataSource, KendoGridState } from '../../common/components/kendo-grid/kendo-grid-state';
 import { getEnumValues } from '../../common/utils/form-helpers';
@@ -23,14 +24,12 @@ export const UsersGrid = observer(() => {
     return (
         <KendoGrid
             gridState={gridState}
-            filterable
             sortable
             groupable
         >
             <GridColumn
                 field="id"
                 title="id"
-                filterable={false}
                 editable={false}
                 groupable={false}
                 width="100px"
@@ -39,13 +38,13 @@ export const UsersGrid = observer(() => {
                 field="login"
                 title="login"
                 width="240px"
+                columnMenu={StandardColumnMenuFilter}
                 groupable={false}
             />
             <GridColumn
                 field="password"
                 title="password"
                 cell={PasswordCell}
-                filterable={false}
                 sortable={false}
                 groupable={false}
             />
@@ -53,11 +52,11 @@ export const UsersGrid = observer(() => {
                 field="role"
                 title="role"
                 cell={SelectRoleCell}
+                columnMenu={StandardColumnMenuFilter}
             />
             <GridColumn
                 title="Actions"
                 cell={ActionCell}
-                filterable={false}
                 sortable={false}
                 groupable={false}
             />
