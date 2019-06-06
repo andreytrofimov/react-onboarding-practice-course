@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Form, Link } from '@servicetitan/design-system';
 
 import { AuthLayout } from './auth-layout';
 
-export const LoginPage = () => {
+export const LoginPage: React.FC = () => {
     const login = console.log; // @todo
 
     return (

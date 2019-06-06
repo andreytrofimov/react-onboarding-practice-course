@@ -8,7 +8,7 @@ import { AuthLayout } from './auth-layout';
 
 const roleOptions = enumToOptions(Role);
 
-export const RegisterPage = () => {
+export const RegisterPage: React.FC = () => {
     const register = console.log; // @todo
 
     return (
