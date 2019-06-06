@@ -23,15 +23,44 @@ export const UsersGrid = observer(() => {
     return (
         <KendoGrid
             gridState={gridState}
-            selectable
+            filterable
             sortable
-            groupable={{ footer: 'visible' }}
+            groupable
         >
-            <GridColumn field="id" title="id" filterable={false} editable={false} width="100px" />
-            <GridColumn field="login" title="login" width="240px" />
-            <GridColumn field="password" title="password" cell={PasswordCell} />
-            <GridColumn field="role" title="role" cell={SelectRoleCell} />
-            <GridColumn title="Actions" cell={ActionCell} />
+            <GridColumn
+                field="id"
+                title="id"
+                filterable={false}
+                editable={false}
+                groupable={false}
+                width="100px"
+            />
+            <GridColumn
+                field="login"
+                title="login"
+                width="240px"
+                groupable={false}
+            />
+            <GridColumn
+                field="password"
+                title="password"
+                cell={PasswordCell}
+                filterable={false}
+                sortable={false}
+                groupable={false}
+            />
+            <GridColumn
+                field="role"
+                title="role"
+                cell={SelectRoleCell}
+            />
+            <GridColumn
+                title="Actions"
+                cell={ActionCell}
+                filterable={false}
+                sortable={false}
+                groupable={false}
+            />
         </KendoGrid>
     );
 });
