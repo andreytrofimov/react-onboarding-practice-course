@@ -1,17 +1,35 @@
-import { AxiosPromise } from 'axios';
+import { AxiosResponse } from 'axios';
 
-export function mockResponse<T, R>(ps: {
+type MockResponseParams<R, T> = {
     log: string;
     data: T;
     response: R;
-}): AxiosPromise<R> {
-    console.log(ps.log, ps.data);
+    status?: number;
+    statusText?: string;
+};
 
-    return Promise.resolve({
-        data: ps.response,
-        status: 200,
-        statusText: '',
+export async function mockResponse<R, T>({
+    log,
+    data,
+    response,
+    status = 200,
+    statusText = '',
+}: MockResponseParams<R, T>): Promise<AxiosResponse<R>> {
+    await randomLatency(100, 700);
+
+    console.log(log, data);
+
+    return {
+        data: response,
+        status,
+        statusText,
         config: {},
         headers: {},
-    });
+    };
+}
+
+function randomLatency(from: number, to: number) {
+    const diff = to - from;
+    const n = from + (diff * Math.random());
+    return new Promise(r => setTimeout(r, n));
 }

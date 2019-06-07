@@ -2,7 +2,6 @@ import { GridColumn } from '@progress/kendo-react-grid';
 
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useEffect, useMemo } from 'react';
 
 import { getEditAndDeleteActionCell } from '../../common/components/kendo-grid/editable-cell/get-edit-and-delete-action-cell';
 import { getSelectCell } from '../../common/components/kendo-grid/editable-cell/get-select-cell';
@@ -11,7 +10,7 @@ import { StandardColumnMenuFilter } from '../../common/components/kendo-grid/fil
 import { KendoGrid } from '../../common/components/kendo-grid/kendo-grid';
 import { InMemoryDataSource, KendoGridState } from '../../common/components/kendo-grid/kendo-grid-state';
 import { getEnumValues } from '../../common/utils/form-helpers';
-import { Users } from '../../mocks/user';
+import { UsersDB } from '../../mocks/user.db';
 import { Role, User } from '../../user/models';
 
 type UsersGridState = KendoGridState<User, User['id']>;
@@ -72,10 +71,10 @@ function useUsersGridState(): UsersGridState {
         });
     }
 
-    const gridState = useMemo(factory, []);
+    const gridState = React.useMemo(factory, []);
 
-    useEffect(() => {
-        gridState.setDataSource(new InMemoryDataSource(Users));
+    React.useEffect(() => {
+        gridState.setDataSource(new InMemoryDataSource(UsersDB.get()));
     }, []);
 
     return gridState;
@@ -84,7 +83,7 @@ function useUsersGridState(): UsersGridState {
 const SelectRoleCell = getSelectCell(getEnumValues(Role));
 
 function useActionCellMemo(gridState: UsersGridState) {
-    return useMemo(() => getEditAndDeleteActionCell<User>({
+    return React.useMemo(() => getEditAndDeleteActionCell<User>({
         onEdit: u => gridState.edit(u),
         onSave: u => gridState.saveEdit(u),
         onCancel: u => gridState.cancelEdit(u),
