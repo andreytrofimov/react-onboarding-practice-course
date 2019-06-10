@@ -1,5 +1,6 @@
+import { Role } from '../common/models/role';
+import { User } from '../common/models/user';
 import { cloneDeep } from '../common/utils/clone-deep';
-import { Role, User } from '../user/models';
 
 const Dave = {
     id: 1,
@@ -8,8 +9,24 @@ const Dave = {
     role: Role.Admin,
 };
 
+const Lil = {
+    id: 2,
+    login: 'lil',
+    password: 'qweqweqwe',
+    role: Role.Operator,
+};
+
+const John = {
+    id: 3,
+    login: 'john',
+    password: 'qweqweqwe',
+    role: Role.Public,
+};
+
 const DefaultUsers = [
     Dave,
+    Lil,
+    John,
 ];
 
 class UsersDB {
@@ -89,11 +106,17 @@ class UsersDB {
         return cloneDeep(this._findByLogin(login));
     }
 
+    isLoginAlreadyInUse(login: string): boolean {
+        return !!this._findByLogin(login);
+    }
+
     private _findByLogin(login?: string) {
         if (!login) {
             return void 0;
         }
-        return this.users.find(u => u.login === login);
+
+        const lcLogin = login.toLowerCase();
+        return this.users.find(u => u.login!.toLowerCase() === lcLogin);
     }
 }
 

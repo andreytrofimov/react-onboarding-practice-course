@@ -1,9 +1,8 @@
 import { Button, ButtonGroup, Form, Link } from '@servicetitan/design-system';
 import * as React from 'react';
 
+import { Role } from '../../common/models/role';
 import { enumToOptions } from '../../common/utils/form-helpers';
-import { Role } from '../../user/models';
-
 import { AuthLayout } from './auth-layout';
 
 const roleOptions = enumToOptions(Role);

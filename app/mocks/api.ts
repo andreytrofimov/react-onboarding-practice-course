@@ -9,7 +9,7 @@ type MockResponseParams<R, T> = {
 };
 
 export async function mockResponse<R, T>({
-    log,
+    log: logMsg,
     data,
     response,
     status = 200,
@@ -17,19 +17,21 @@ export async function mockResponse<R, T>({
 }: MockResponseParams<R, T>): Promise<AxiosResponse<R>> {
     await randomLatency(100, 700);
 
-    console.log(log, data);
-
-    return {
+    const r = {
         data: response,
         status,
         statusText,
         config: {},
         headers: {},
     };
+
+    console.log(logMsg, data, r);
+
+    return r;
 }
 
 function randomLatency(from: number, to: number) {
-    const diff = to - from;
-    const n = from + (diff * Math.random());
+    const range = to - from;
+    const n = from + (range * Math.random());
     return new Promise(r => setTimeout(r, n));
 }

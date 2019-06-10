@@ -9,9 +9,10 @@ import { PasswordCell } from '../../common/components/kendo-grid/editable-cell/p
 import { StandardColumnMenuFilter } from '../../common/components/kendo-grid/filters/column-menu-filters';
 import { KendoGrid } from '../../common/components/kendo-grid/kendo-grid';
 import { InMemoryDataSource, KendoGridState } from '../../common/components/kendo-grid/kendo-grid-state';
+import { Role } from '../../common/models/role';
+import { User } from '../../common/models/user';
 import { getEnumValues } from '../../common/utils/form-helpers';
 import { UsersDB } from '../../mocks/user.db';
-import { Role, User } from '../../user/models';
 
 type UsersGridState = KendoGridState<User, User['id']>;
 

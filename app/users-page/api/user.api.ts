@@ -1,9 +1,10 @@
-import { injectable } from '@servicetitan/react-ioc';
 import { AxiosPromise } from 'axios';
 
-import { mockResponse } from '../mocks/api';
-import { UsersDB } from '../mocks/user.db';
-import { User } from './models';
+import { injectable } from '@servicetitan/react-ioc';
+
+import { User } from '../../common/models/user';
+import { mockResponse } from '../../mocks/api';
+import { UsersDB } from '../../mocks/user.db';
 
 export interface IUserApi {
     getAll(): AxiosPromise<User[]>;
