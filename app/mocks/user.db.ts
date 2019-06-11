@@ -2,21 +2,21 @@ import { Role } from '../common/models/role';
 import { User } from '../common/models/user';
 import { cloneDeep } from '../common/utils/clone-deep';
 
-const Dave = {
+export const Dave = {
     id: 1,
     login: 'dave',
     password: 'qweqweqwe',
     role: Role.Admin,
 };
 
-const Lil = {
+export const Lil = {
     id: 2,
     login: 'lil',
     password: 'qweqweqwe',
     role: Role.Operator,
 };
 
-const John = {
+export const John = {
     id: 3,
     login: 'john',
     password: 'qweqweqwe',
