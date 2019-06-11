@@ -30,29 +30,38 @@ export class RegisterStore {
     loginIsNotInUseValidator: Validator<string> = async v =>
         (await this.isLoginAlreadyInUse(v)) && 'Login is already taken';
 
-    passwordMatchValidator: Validator<string> = v =>
-        (this.form.$.passwordConfirmation.$ !== v) && 'Passwords must match';
-
-    passwordMatchConfirmationValidator: Validator<string> = v =>
-        (this.form.$.password.$ !== v) && ' ';
+    passwordsMatchValidator: Validator<{
+        password: InputFieldState<string>,
+        confirmation: InputFieldState<string>
+    }> = v => {
+        if (v.password.$ !== v.confirmation.$) {
+            v.password.setError('Passwords must match');
+            v.confirmation.setError(' ');
+            return ' ';
+        }
+        return null;
+    };
 
     form = new FormState({
         login: new InputFieldState<string>('').validators(
             FormValidators.required,
             this.loginIsNotInUseValidator,
-        ),
-        password: new InputFieldState<string>('').validators(
-            FormValidators.required,
-            this.strongPasswordValidator,
-            this.passwordMatchValidator,
-        ),
-        passwordConfirmation: new InputFieldState<string>('').validators(
-            FormValidators.required,
-            this.passwordMatchConfirmationValidator
-        ),
+        ).disableAutoValidation(),
+        passwords:
+            new FormState({
+                password: new InputFieldState<string>('').validators(
+                    FormValidators.required,
+                    this.strongPasswordValidator,
+                ).disableAutoValidation(),
+                confirmation: new InputFieldState<string>('').validators(
+                    FormValidators.required,
+                ).disableAutoValidation(),
+            }).validators(
+                this.passwordsMatchValidator,
+            ),
         role: new DropdownFieldState<Role>(Role.Public).validators(
             FormValidators.required,
-        ),
+        ).disableAutoValidation(),
     });
 
     @action
