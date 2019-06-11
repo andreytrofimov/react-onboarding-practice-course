@@ -1,2 +1,1 @@
-export * from './components/login-page';
-export * from './components/register-page';
+export * from './components/auth-router';
