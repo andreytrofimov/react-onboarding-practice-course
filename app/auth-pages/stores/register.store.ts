@@ -74,7 +74,11 @@ export class RegisterStore {
 
         const data = formStateToJS(this.form);
 
-        const r = await this.authApi.register(data);
+        const r = await this.authApi.register({
+            login: data.login,
+            password: data.passwords.password,
+            role: data.role,
+        });
 
         if (r.status !== 200) {
             runInAction(() => {
