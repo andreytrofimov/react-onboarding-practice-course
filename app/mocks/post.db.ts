@@ -5,48 +5,48 @@ import { John, Lil } from './user.db';
 const Post1: Post = {
     id: 1,
     title: 'Vlog Kinfolk',
-    description: `
-        Lorem ipsum dolor amet williamsburg vlog kinfolk, meditation DIY yr brooklyn pug tousled 
-        celiac tofu marfa. Sartorial freegan poke, unicorn mustache VHS stumptown cold-pressed 
-        vape leggings beard ugh cornhole fam. Cornhole poutine artisan butcher. Chillwave etsy 
-        venmo pitchfork vinyl. La croix mlkshk poke, portland quinoa ethical chartreuse occupy 
-        roof party gluten-free lomo marfa. Readymade succulents pabst hell of gochujang 
-        sartorial seitan chicharrones humblebrag slow-carb.
-    `,
-    author: John.login,
-    createdAt: '2019-03-11T02:44:48.588Z'
+    description:
+        + 'Lorem ipsum dolor amet williamsburg vlog kinfolk, meditation DIY yr brooklyn pug tousled '
+        + 'celiac tofu marfa. Sartorial freegan poke, unicorn mustache VHS stumptown cold-pressed '
+        + 'vape leggings beard ugh cornhole fam. Cornhole poutine artisan butcher. Chillwave etsy '
+        + 'venmo pitchfork vinyl. La croix mlkshk poke, portland quinoa ethical chartreuse occupy '
+        + 'roof party gluten-free lomo marfa. Readymade succulents pabst hell of gochujang '
+        + 'sartorial seitan chicharrones humblebrag slow-carb.'
+    ,
+    authorId: John.id,
+    createdAt: new Date('2019-06-01T02:00:00.000Z'),
 };
 
 const Post2: Post = {
     id: 2,
     title: 'Synth Narwhal Kickstarter',
-    description: `
-        Tattooed PBR&B trust fund synth narwhal kickstarter, man bun craft beer hot chicken
-        street art letterpress. Fixie copper mug deep v distillery, bicycle rights bitters
-        stumptown banjo man braid selfies live-edge. Enamel pin master cleanse plaid prism.
-        Shaman ethical plaid lumbersexual you probably haven't heard of them tilde.
-        Brooklyn knausgaard dreamcatcher occupy meggings cornhole bicycle rights church-key
-        live-edge drinking vinegar fanny pack normcore DIY shaman meditation. Cronut banjo
-        church-key aesthetic.
-    `,
-    author: Lil.login,
-    createdAt: '2019-04-11T02:44:48.588Z'
+    description: ''
+        + 'Tattooed PBR&B trust fund synth narwhal kickstarter, man bun craft beer hot chicken '
+        + 'street art letterpress. Fixie copper mug deep v distillery, bicycle rights bitters '
+        + 'stumptown banjo man braid selfies live-edge. Enamel pin master cleanse plaid prism. '
+        + 'Shaman ethical plaid lumbersexual you probably haven\'t heard of them tilde. '
+        + 'Brooklyn knausgaard dreamcatcher occupy meggings cornhole bicycle rights church-key '
+        + 'live-edge drinking vinegar fanny pack normcore DIY shaman meditation. Cronut banjo '
+        + 'church-key aesthetic.'
+    ,
+    authorId: Lil.id,
+    createdAt: new Date('2019-06-10T02:00:00.000Z'),
 };
 
 const Post3: Post = {
     id: 3,
     title: 'Ethical Readymade Skateboard',
-    description: `
-        Paleo meggings plaid bitters literally street art etsy 3 wolf moon art party 
-        chambray church-key kinfolk. Copper mug cardigan mustache cronut. Etsy skateboard 
-        meditation, tattooed single-origin coffee edison bulb vexillologist af. 
-        Blog edison bulb four loko kogi meditation ethical readymade skateboard. 
-        Church-key squid jianbing before they sold out intelligentsia mustache affogato 
-        brooklyn ramps kale chips knausgaard wayfarers williamsburg. Post-ironic palo santo 
-        cardigan freegan sartorial.
-    `,
-    author: Lil.login,
-    createdAt: '2019-06-11T02:44:48.588Z'
+    description:
+        + 'Paleo meggings plaid bitters literally street art etsy 3 wolf moon art party ' 
+        + 'chambray church-key kinfolk. Copper mug cardigan mustache cronut. Etsy skateboard ' 
+        + 'meditation, tattooed single-origin coffee edison bulb vexillologist af. ' 
+        + 'Blog edison bulb four loko kogi meditation ethical readymade skateboard. ' 
+        + 'Church-key squid jianbing before they sold out intelligentsia mustache affogato ' 
+        + 'brooklyn ramps kale chips knausgaard wayfarers williamsburg. Post-ironic palo santo ' 
+        + 'cardigan freegan sartorial.'
+    ,
+    authorId: Lil.id,
+    createdAt: new Date('2019-06-13T02:44:48.588Z'),
 };
 
 export const News = [
@@ -76,7 +76,7 @@ class NewsDB {
         this.news.push({
             ...dataClone,
             id: this.nextId,
-            createdAt: (new Date()).toISOString(),
+            createdAt: new Date(),
         });
     }
 
