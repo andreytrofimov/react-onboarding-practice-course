@@ -1,8 +1,9 @@
-import { Avatar, Button, Card, Popover, Stack, Text } from '@servicetitan/design-system';
 import * as moment from 'moment';
 import * as React from 'react';
-import { User } from '../../common/models/user';
 
+import { Avatar, Button, Card, Popover, Stack, Text } from '@servicetitan/design-system';
+
+import { User } from '../../common/models/user';
 import { Post } from '../models/post';
 
 interface PostProps {
