@@ -7,18 +7,18 @@ import { Button, Form, Modal } from '@servicetitan/design-system';
 import { Label } from '../../common/components/label/label';
 import { InputFieldState, TextAreaFieldState } from '../../common/utils/form-helpers';
 import { FormValidators } from '../../common/utils/form-validators';
-import { Post1 } from '../../mocks/post.db';
+import { Post } from '../models/post';
 
 function useStore() {
     function factory() {
-        const post = Post1;
+        let post: Post | undefined;
 
         return {
-            form: new FormState({
-                title: new InputFieldState(post.title).validators(
+            form: post && new FormState({
+                title: new InputFieldState(post!.title).validators(
                     FormValidators.required,
                 ),
-                description: new TextAreaFieldState(post.description).validators(
+                description: new TextAreaFieldState(post!.description).validators(
                     FormValidators.required,
                 ),
             }),
@@ -33,7 +33,7 @@ function useStore() {
 
 export const EditPostModal: React.FC = observer(() => {
     const { post, onCancel, onSave, form } = useStore();
-    if (!post) {
+    if (!form || !post) {
         return null;
     }
 

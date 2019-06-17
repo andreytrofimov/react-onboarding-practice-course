@@ -9,6 +9,7 @@ import { getUserConfirmation } from './common/components/confirm-navigation/conf
 import { SideNavigation } from './common/components/side-navigation';
 import { AuthRouter } from './auth-pages';
 import { AuthStore } from './common/stores/auth.store';
+import { NewsPage } from './news-page';
 import { UsersPage } from './users-page';
 
 const App_: React.FC = observer(() => {
@@ -39,6 +40,7 @@ const LoggedIn: React.FC = () =>
             <Stack.Item fill alignSelf="stretch" className="d-f">
                 <Switch>
                     <Route path="/users" component={UsersPage}/>
+                    <Route path="/news" component={NewsPage} />
 
                     <Route exact path="/" component={DefaultPage}/>
                     <Redirect to="/" />
