@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react';
 
-import { Avatar, Button, Card, Popover, Stack, Text } from '@servicetitan/design-system';
+import { Avatar, Card, Dropdown, Icon, Stack, Text } from '@servicetitan/design-system';
 
 import { User } from '../../common/models/user';
 import { Post } from '../models/post';
@@ -14,8 +14,6 @@ interface PostProps {
 }
 
 export const PostCard: React.FC<PostProps> = ({ post, authorName, onEdit, onDelete }) => {
-    const { isMenuOpen, toggleMenu } = useMenuState();
-
     return (
         <Card>
             <Card.Section>
@@ -30,33 +28,18 @@ export const PostCard: React.FC<PostProps> = ({ post, authorName, onEdit, onDele
                         <Text size={1} className="m-0">{fromNow(post.createdAt!)}</Text>
                     </Stack.Item>
                     <Stack.Item>
-                        <Popover
-                            trigger={(
-                                <Button text iconName="more_vert" onClick={toggleMenu}> </Button>
-                            )}
-                            open={isMenuOpen}
-                            sharp
-                            direction="br"
-                            width="auto"
-                            padding="s"
-                        >
-                            <React.Fragment>
-                                <Button text onClick={onEdit}>Edit</Button>
-                                <Button text onClick={onDelete}>Delete</Button>
-                            </React.Fragment>
-                        </Popover>
+                        <Dropdown icon={<Icon size={24} name="more_horiz" />}>
+                            <Dropdown.Menu>
+                                <Dropdown.Item text="Edit" onClick={onEdit} />
+                                <Dropdown.Item text="Delete" onClick={onDelete} />
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Stack.Item>
                 </Stack>
             </Card.Section>
         </Card>
     );
 };
-
-function useMenuState() {
-    const [isMenuOpen, setMenuOpen] = React.useState(false);
-    const toggleMenu = () => { setMenuOpen(!isMenuOpen); };
-    return { isMenuOpen, toggleMenu };
-}
 
 function fromNow(date: Date) {
     return moment(date).fromNow();
