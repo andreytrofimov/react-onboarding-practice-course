@@ -1,8 +1,9 @@
 import * as moment from 'moment';
 import * as React from 'react';
 
-import { Avatar, Card, Dropdown, Icon, Stack, Text } from '@servicetitan/design-system';
+import { Avatar, Card, Dialog, Dropdown, Icon, Stack, Text } from '@servicetitan/design-system';
 
+import { Confirm, ConfirmationProps } from '../../common/components/confirm/confirm';
 import { User } from '../../common/models/user';
 import { Post } from '../models/post';
 
@@ -31,7 +32,7 @@ export const PostCard: React.FC<PostProps> = ({ post, authorName, onEdit, onDele
                         <Dropdown icon={<Icon size={24} name="more_horiz" />}>
                             <Dropdown.Menu>
                                 <Dropdown.Item text="Edit" onClick={onEdit} />
-                                <Dropdown.Item text="Delete" onClick={onDelete} />
+                                <DeleteDropdownItem onDelete={onDelete} />
                             </Dropdown.Menu>
                         </Dropdown>
                     </Stack.Item>
@@ -44,3 +45,33 @@ export const PostCard: React.FC<PostProps> = ({ post, authorName, onEdit, onDele
 function fromNow(date: Date) {
     return moment(date).fromNow();
 }
+
+interface DeleteDropdownItemProps {
+    onDelete: () => void;
+}
+
+const DeleteDropdownItem: React.FC<DeleteDropdownItemProps> = ({
+    onDelete,
+}) =>
+    (
+        <Confirm onClick={onDelete} confirmation={DeleteConfirmation}>
+            {onClick => (
+                <Dropdown.Item text="Delete" onClick={onClick} />
+            )}
+        </Confirm>
+    );
+
+
+const DeleteConfirmation: React.FC<ConfirmationProps> = ({ onConfirm, onCancel }) =>
+    (
+        <Dialog
+            open
+            onClose={onCancel}
+            title="Delete Post"
+            negative
+            onPrimaryActionClick={onConfirm}
+            primaryActionName="Delete"
+            onSecondaryActionClick={onCancel}
+            secondaryActionName="Cancel"
+        >Are you sure you want to delete this post?</Dialog>
+    );
