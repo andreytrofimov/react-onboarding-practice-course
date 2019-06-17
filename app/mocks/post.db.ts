@@ -2,7 +2,7 @@ import { cloneDeep } from '../common/utils/clone-deep';
 import { Post } from '../news-page/models/post';
 import { John, Lil } from './user.db';
 
-const Post1: Post = {
+export const Post1: Post = {
     id: 1,
     title: 'Vlog Kinfolk',
     description:
