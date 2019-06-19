@@ -70,14 +70,16 @@ class NewsDB {
         return cloneDeep(this.news);
     }
 
-    create(data: Post): void {
-        const dataClone = cloneDeep(data);
-
-        this.news.push({
-            ...dataClone,
+    create(data: Post): Post {
+        const post = {
+            ...cloneDeep(data),
             id: this.nextId,
             createdAt: new Date(),
-        });
+        };
+
+        this.news.push(post);
+
+        return cloneDeep(post);
     }
 
     private get nextId(): number {

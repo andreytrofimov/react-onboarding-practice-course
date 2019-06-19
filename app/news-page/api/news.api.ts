@@ -26,12 +26,12 @@ export class NewsApi implements INewsApi {
     }
 
     create(data: Post) {
-        NewsDB.create(data);
+        const post = NewsDB.create(data);
 
         return mockResponse({
             log: 'NewsApi.register',
-            data: void 0,
-            response: void 0,
+            data: data,
+            response: post,
         });
     }
 
