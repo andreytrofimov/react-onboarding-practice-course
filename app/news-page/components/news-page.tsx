@@ -21,20 +21,20 @@ export const NewsPage: React.FC = observer(() => {
 
     return (
         <Page className="flex-auto">
+            <Stack justifyContent="center">
+                <Button primary onClick={onCreate}>Create new</Button>
+            </Stack>
             <Layout type="island">
-                <Stack justifyContent="center" className="m-b-3">
-                    <Button primary onClick={onCreate}>Create new</Button>
-                </Stack>
                 <EditPostModal />
                 {postCardData.map(([p, a]) => (
-                    <div className="m-b-3" key={p.id}>
+                    <Layout.Section key={p.id}>
                         <PostCard
                             post={p}
                             authorName={a}
                             onEdit={() => onEdit(p)}
                             onDelete={() => onDelete(p)}
                         />
-                    </div>
+                    </Layout.Section>
                 ))}
             </Layout>
         </Page>

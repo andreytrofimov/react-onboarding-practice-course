@@ -14,11 +14,12 @@ function useStore() {
         let post: Post | undefined;
 
         return {
-            form: post && new FormState({
-                title: new InputFieldState(post!.title).validators(
+            isOpen: false,
+            form: new FormState({
+                title: new InputFieldState(post && post.title).validators(
                     FormValidators.required,
                 ),
-                description: new TextAreaFieldState(post!.description).validators(
+                description: new TextAreaFieldState(post && post.description).validators(
                     FormValidators.required,
                 ),
             }),
@@ -32,19 +33,16 @@ function useStore() {
 }
 
 export const EditPostModal: React.FC = observer(() => {
-    const { post, onCancel, onSave, form } = useStore();
-    if (!form || !post) {
-        return null;
-    }
+    const { isOpen, post, onCancel, onSave, form } = useStore();
 
     const { title, description } = form.$;
 
     return (
         <Modal
-            open
+            open={isOpen}
             onClose={onCancel}
             closable
-            title={post.id ? 'Edit Post' : 'Create Post'}
+            title={post ? 'Edit Post' : 'Create Post'}
             footer={(
                 <React.Fragment>
                     <Button onClick={onCancel}>Cancel</Button>
