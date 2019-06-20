@@ -1,48 +1,29 @@
-import { FormState } from 'formstate';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 
 import { Button, Form, Modal } from '@servicetitan/design-system';
 
 import { Label } from '../../common/components/label/label';
-import { InputFieldState, TextAreaFieldState } from '../../common/utils/form-helpers';
-import { FormValidators } from '../../common/utils/form-validators';
-import { Post } from '../models/post';
+import { EditPostStore } from '../stores/edit-post.store';
 
-function useStore() {
-    function factory() {
-        let post: Post | undefined;
-
-        return {
-            isOpen: false,
-            form: new FormState({
-                title: new InputFieldState(post && post.title).validators(
-                    FormValidators.required,
-                ),
-                description: new TextAreaFieldState(post && post.description).validators(
-                    FormValidators.required,
-                ),
-            }),
-            post,
-            onCancel: console.log,
-            onSave: console.log,
-        };
-    }
-
-    return React.useMemo(factory, []);
+interface EditPostModalProps {
+    store?: EditPostStore;
 }
 
-export const EditPostModal: React.FC = observer(() => {
-    const { isOpen, post, onCancel, onSave, form } = useStore();
+export const EditPostModal: React.FC<EditPostModalProps> = observer(({ store }) => {
+    if (!store) {
+        return null;
+    }
 
+    const { post, onCancel, onSave, form } = store;
     const { title, description } = form.$;
 
     return (
         <Modal
-            open={isOpen}
+            open
             onClose={onCancel}
             closable
-            title={post ? 'Edit Post' : 'Create Post'}
+            title={post.id ? 'Edit Post' : 'Create Post'}
             footer={(
                 <React.Fragment>
                     <Button onClick={onCancel}>Cancel</Button>
