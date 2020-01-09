@@ -11,6 +11,7 @@ import { AuthRouter } from './auth-pages';
 import { AuthStore } from './common/stores/auth.store';
 import { NewsPage } from './news-page';
 import { UsersPage } from './users-page';
+import { UserApi } from './users-page/api/user.api';
 
 const App_: React.FC = observer(() => {
     const [{ isAuthenticated }] = useDependencies(AuthStore);
@@ -31,7 +32,7 @@ export const App: typeof App_ = provide({
     ]
 })(App_);
 
-const LoggedIn: React.FC = () =>
+const LoggedIn_: React.FC = () =>
     (
         <Stack alignItems="flex-start" justifyContent="center" className="flex-auto">
             <Stack.Item alignSelf='flex-start'>
@@ -48,6 +49,12 @@ const LoggedIn: React.FC = () =>
             </Stack.Item>
         </Stack>
     );
+
+const LoggedIn: typeof LoggedIn_ = provide({
+    singletons: [
+        UserApi,
+    ],
+})(LoggedIn_);
 
 const DefaultPage: React.FC = () =>
     (

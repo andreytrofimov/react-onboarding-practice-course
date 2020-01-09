@@ -14,7 +14,6 @@ import { KendoGrid } from '../../common/components/kendo-grid/kendo-grid';
 import { Role } from '../../common/models/role';
 import { User } from '../../common/models/user';
 import { getEnumValues } from '../../common/utils/form-helpers';
-import { UserApi } from '../api/user.api';
 import { UsersStore } from '../store/users.store';
 
 const UsersGrid_ = observer(() => {
@@ -74,7 +73,6 @@ const UsersGrid_ = observer(() => {
 
 export const UsersGrid: typeof UsersGrid_ = provide({
     singletons: [
-        UserApi,
         UsersStore,
     ],
 })(UsersGrid_);

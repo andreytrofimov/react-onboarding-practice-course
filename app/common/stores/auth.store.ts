@@ -23,4 +23,8 @@ export class AuthStore {
     logout = (): void => {
         this.user = void 0;
     };
+
+    getUser() {
+        return this.user;
+    }
 }
